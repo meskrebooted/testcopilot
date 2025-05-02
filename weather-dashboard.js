@@ -1,7 +1,4 @@
-import axios from 'axios';
-
-const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
-const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+const apiUrl = 'https://api.open-meteo.com/v1/forecast';
 
 const searchButton = document.getElementById('searchButton');
 const locationInput = document.getElementById('location');
@@ -21,14 +18,8 @@ searchButton.addEventListener('click', () => {
 
 async function fetchWeatherData(location) {
     try {
-        const response = await axios.get(apiUrl, {
-            params: {
-                q: location,
-                appid: apiKey,
-                units: 'metric'
-            }
-        });
-        const data = response.data;
+        const response = await fetch(`${apiUrl}?latitude=${location.latitude}&longitude=${location.longitude}&current_weather=true`);
+        const data = await response.json();
         updateUI(data);
     } catch (error) {
         displayError('Failed to fetch weather data. Please try again.');
@@ -36,9 +27,9 @@ async function fetchWeatherData(location) {
 }
 
 function updateUI(data) {
-    temperatureElement.textContent = `Temperature: ${data.main.temp}°C`;
-    humidityElement.textContent = `Humidity: ${data.main.humidity}%`;
-    conditionsElement.textContent = `Conditions: ${data.weather[0].description}`;
+    temperatureElement.textContent = `Temperature: ${data.current_weather.temperature}°C`;
+    humidityElement.textContent = `Humidity: ${data.current_weather.humidity}%`;
+    conditionsElement.textContent = `Conditions: ${data.current_weather.weathercode}`;
     errorElement.textContent = '';
 }
 
