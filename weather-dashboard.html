@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main>
+        <section id="search">
+            <input type="text" id="location" placeholder="Enter location">
+            <button id="searchButton">Search</button>
+        </section>
+        <section id="weatherData">
+            <h2>Weather Data</h2>
+            <p id="temperature"></p>
+            <p id="humidity"></p>
+            <p id="conditions"></p>
+        </section>
+        <section id="errorMessage">
+            <p id="error"></p>
+        </section>
+    </main>
+    <script src="weather-dashboard.js"></script>
+</body>
+</html>
